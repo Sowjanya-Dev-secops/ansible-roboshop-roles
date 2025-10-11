@@ -5,5 +5,28 @@
 
 - name: install node js
   ansible.builtin.import_role:
-    name: common
-    tasks_from: nodejs.yaml
+  name: common
+  tasks_from: nodejs.yaml
+
+- name: copy mongo repo
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo 
+
+- name: install mongodb client
+  ansible.builtin.package:
+    name: mongodb-mongosh
+    state: present
+
+- name: connect to mongodb catalouge
+  ansible.builtin.command: mongosh mongodb.{{ MONGODB_HOST }}.fun --quiet --eval "db.getMongo().getDBNames().indexOf('catalouge')"
+  register: catalouge_output
+
+# - name: print catalouge_output
+#   ansible.builtin.debug:
+#     msg: "{{ catalouge_output }}"
+
+- name: load product into mongodb
+  ansible.builtin.shell: mongosh --host mongodb.{{ MONGODB_HOST }}.fun </app/db/master-data.js
+  when: catalouge_output.stdout | int < 0
+      
