@@ -16,7 +16,7 @@
       state: directory
       path: /app
 
-  - name: delete {{ component }} file (delete file)
+  - name: delete catalouge file (delete file)
     ansible.builtin.file:
       path: /tmp/{{ component }}.zip
       state: absent
@@ -27,7 +27,7 @@
       url: https://roboshop-artifacts.s3.amazonaws.com/{{ component }}-v3.zip 
       dest: /tmp/{{ component }}.zip
 
-  - name: Extract {{ component }} application
+  - name: Extract catalouge application
     ansible.builtin.unarchive:
      src: /tmp/{{ component }}.zip
      dest: /app 
