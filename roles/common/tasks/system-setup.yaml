@@ -6,7 +6,6 @@
   
 - name: start and enable the catalouge
   ansible.builtin.service:
-    name: "{{ component }}""
+    name: "{{ component }}"
     state: started
     enabled: true
-    daemon_reload: true
