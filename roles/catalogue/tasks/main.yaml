@@ -19,7 +19,7 @@
     state: present
 
 - name: connect to mongodb catalouge
-  ansible.builtin.command: mongosh mongodb.{{ MONGODB_HOST }}.fun --quiet --eval "db.getMongo().getDBNames().indexOf('catalouge')"
+  ansible.builtin.command: mongosh {{ MONGODB_HOST }} --quiet --eval "db.getMongo().getDBNames().indexOf('catalouge')"
   register: catalouge_output
 
 # - name: print catalouge_output
@@ -27,6 +27,10 @@
 #     msg: "{{ catalouge_output }}"
 
 - name: load product into mongodb
-  ansible.builtin.shell: mongosh --host mongodb.{{ MONGODB_HOST }}.fun </app/db/master-data.js
+  ansible.builtin.shell: mongosh --host {{ MONGODB_HOST }} </app/db/master-data.js
   when: catalouge_output.stdout | int < 0
       
+- name: system setup 
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: system-setup.yaml
