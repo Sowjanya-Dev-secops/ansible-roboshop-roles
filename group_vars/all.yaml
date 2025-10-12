@@ -1,2 +1,3 @@
 MONGODB_HOST: mongodb.msdevsecops.fun
 REDIS_HOST: redis.msdevsecops.fun
+CATALOGUE_HOST: catalogue.msdevsecops.fun
