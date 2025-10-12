@@ -8,6 +8,11 @@
     name: common
     tasks_from: java.yaml
 
+- name: install nodejs
+  ansible.builtin.package:
+      name: mysql
+      state: present
+
 - name: install mysql python libraries
   ansible.builtin.pip:
     executable: pip3.9
