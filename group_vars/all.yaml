@@ -3,3 +3,5 @@ REDIS_HOST: redis.msdevsecops.fun
 CATALOGUE_HOST: catalogue.msdevsecops.fun
 MYSQL_HOST: mysql.msdevsecops.fun
 CART_HOST: cart.msdevsecops.fun
+USER_HOST: user.msdevsecops.fun
+RABBITMQ_HOST: rabbitmq.msdevsecops.fun
